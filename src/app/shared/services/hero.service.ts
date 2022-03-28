@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Hero } from 'src/app/hero/hero.interface';
+import {MissionHero} from "../../hero/missionHero.interface";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,23 +25,23 @@ export class HeroService {
     return <Observable<Hero[]>> this.http.get(this.heroApiUrl);
   }
 
-  getSuperHeroeById(heroId): Observable<Hero> {
+  getSuperHeroeById(heroId: number): Observable<Hero> {
     return <Observable<Hero>> this.http.get(this.heroApiUrl + '/' + heroId);
   }
 
-  addHero(hero) {
+  addHero(hero: Hero) {
     return this.http.post(this.heroApiUrl, hero, httpOptions);
   }
-  
-  updateHero(heroId, hero) {
+
+  updateHero(heroId: number, hero: Hero) {
     return this.http.put(this.heroApiUrl + '/' + heroId, hero, httpOptions);
   }
 
-  addMissionToHero(missionHero) {
+  addMissionToHero(missionHero: MissionHero) {
     return this.http.post(this.heroApiUrl + '/add-superhero-to-mission', missionHero, httpOptions);
   }
-  
-  deleteHero(heroId) {
+
+  deleteHero(heroId: number) {
     return this.http.delete(this.heroApiUrl+ '/' + heroId, secureHttpOptions);
   }
 

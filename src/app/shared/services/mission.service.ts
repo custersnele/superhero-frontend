@@ -24,19 +24,19 @@ export class MissionService {
     return <Observable<Mission[]>> this.http.get(this.missionApiUrl);
   }
 
-  getMissionById(missionId): Observable<Mission> {
+  getMissionById(missionId: number): Observable<Mission> {
     return <Observable<Mission>> this.http.get(this.missionApiUrl + '/' + missionId);
   }
 
-  addMission(mission) {
+  addMission(mission: Mission) {
     return this.http.post(this.missionApiUrl, mission, httpOptions);
   }
-  
-  updateMission(missionId, mission) {
+
+  updateMission(missionId: number, mission: Mission) {
     return this.http.put(this.missionApiUrl + '/' + missionId, mission, httpOptions);
   }
-  
-  deleteMission(missionId) {
+
+  deleteMission(missionId: number) {
     return this.http.delete(this.missionApiUrl+ '/' + missionId, secureHttpOptions);
   }
 }

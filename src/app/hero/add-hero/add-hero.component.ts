@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeroService } from 'src/app/shared/services/hero.service';
+import {Hero} from "../hero.interface";
 
 @Component({
   selector: 'app-add-hero',
@@ -10,7 +11,7 @@ import { HeroService } from 'src/app/shared/services/hero.service';
 })
 export class AddHeroComponent implements OnInit {
 
-  heroForm: FormGroup;
+  heroForm!: FormGroup;
 
   constructor(
     private router: Router,
@@ -30,7 +31,7 @@ export class AddHeroComponent implements OnInit {
   }
 
   addHero() {
-    const newHero = {
+    const newHero :Hero = {
       firstName: this.heroForm.value.firstName,
       lastName: this.heroForm.value.lastName,
       superheroName: this.heroForm.value.superheroName

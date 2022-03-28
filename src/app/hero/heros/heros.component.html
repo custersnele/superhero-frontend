@@ -3,8 +3,8 @@
 </div>
 
 <div *ngFor="let hero of heros" class="card-list">
-  <div class="card" [routerLink]="hero.id">
-    <div class="card-body">
+ <div class="card" [routerLink]="hero.id? hero.id.toString() : ''">
+  <div class="card-body">
       <h5 class="card-title">{{ hero.superheroName }}</h5>
     </div>
   </div>

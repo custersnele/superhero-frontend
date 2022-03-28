@@ -6,7 +6,6 @@ import { HeroService } from 'src/app/shared/services/hero.service';
 import { Hero } from '../hero.interface';
 import { MissionService } from 'src/app/shared/services/mission.service';
 import { Mission } from 'src/app/mission/mission.interface';
-import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
 
 @Component({
   selector: 'app-heros-detail',
@@ -14,16 +13,15 @@ import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
   styleUrls: ['./heros-detail.component.css']
 })
 export class HerosDetailComponent implements OnInit {
-
-  hero: Hero;
-  heroId: string;
+  heroId?: number;
+  hero?: Hero;
   isMission = false;
-  missions: Mission[];
+  missions?: Mission[];
   selectedOption: any;
 
   missionCtrl = new FormControl();
 
-  myForm: FormGroup;
+  myForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +36,7 @@ export class HerosDetailComponent implements OnInit {
     // Get response based on parameter in url
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.heroId = params.get('heroId');
+        this.heroId = parseInt(params.get('heroId') as string);
         return this.heroService.getSuperHeroeById(this.heroId);
       })
     ).subscribe(hero => {
@@ -58,10 +56,6 @@ export class HerosDetailComponent implements OnInit {
     });
   }
 
-  onSelect(event: TypeaheadMatch): void {
-    this.selectedOption = event.item;
-  }
-
   addMissionToHero() {
     const missionHero = {
       missionId: this.selectedOption.id,
@@ -69,21 +63,23 @@ export class HerosDetailComponent implements OnInit {
     };
 
     this.heroService.addMissionToHero(missionHero).subscribe(() => {
-      this.hero = null;
-      this.heroId = null;
+      this.hero = undefined;
+      this.heroId = undefined;
       this.isMission = false;
-      this.missions = null;
+      this.missions = undefined;
       this.selectedOption = null;
       this.ngOnInit();
     });
   }
-  
+
   deleteHero() {
-    this.heroService.deleteHero(this.heroId).subscribe(() => {
-      this.router.navigateByUrl('/heros');
-    });
+    if (this.heroId) {
+      this.heroService.deleteHero(this.heroId).subscribe(() => {
+        this.router.navigateByUrl('/heros');
+      });
+    }
   }
-  
+
   editHero() {
     this.router.navigateByUrl('/heros/edit/'+this.heroId);
   }

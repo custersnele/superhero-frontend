@@ -12,9 +12,9 @@ import { Hero } from '../hero.interface';
 })
 export class EditHeroComponent implements OnInit {
 
-  hero: Hero;
-  heroId: string;
-  heroForm: FormGroup;
+  hero?: Hero;
+  heroId?: number;
+  heroForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +28,7 @@ export class EditHeroComponent implements OnInit {
     // Get response based on parameter in url
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.heroId = params.get('heroId');
+        this.heroId = parseInt(params.get('heroId') as string);
         return this.heroService.getSuperHeroeById(this.heroId);
       })
     ).subscribe(hero => {
@@ -55,9 +55,11 @@ export class EditHeroComponent implements OnInit {
       // missions: this.hero.missions
     };
 
-    this.heroService.updateHero(this.heroId, newHero).subscribe(() => {
-      this.router.navigateByUrl('/heros/' + this.heroId);
-    });
+    if (this.heroId) {
+      this.heroService.updateHero(this.heroId, newHero).subscribe(() => {
+        this.router.navigateByUrl('/heros/' + this.heroId);
+      });
+    }
   }
 
 }
