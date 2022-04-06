@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddMissionComponent implements OnInit {
 
-  missionForm: FormGroup;
+  missionForm!: FormGroup;
 
   constructor(
     private missionService: MissionService,

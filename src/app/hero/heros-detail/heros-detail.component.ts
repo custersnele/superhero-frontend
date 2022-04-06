@@ -17,7 +17,7 @@ export class HerosDetailComponent implements OnInit {
   hero?: Hero;
   isMission = false;
   missions?: Mission[];
-  selectedOption: any;
+  selectedOption?: string;
 
   missionCtrl = new FormControl();
 
@@ -57,19 +57,29 @@ export class HerosDetailComponent implements OnInit {
   }
 
   addMissionToHero() {
+
+    if (!this.selectedOption) {
+      return;
+    }
     const missionHero = {
-      missionId: this.selectedOption.id,
+      missionId: this.missions?.find(m => m.missionName === this.selectedOption)?.id,
       superheroId: this.heroId
     };
+
 
     this.heroService.addMissionToHero(missionHero).subscribe(() => {
       this.hero = undefined;
       this.heroId = undefined;
       this.isMission = false;
       this.missions = undefined;
-      this.selectedOption = null;
+      this.selectedOption = undefined;
       this.ngOnInit();
     });
+  }
+
+  public saveCode(e: Event): void {
+    //let find = this.missions?.find(x => x?.missionName === e?.value);
+    console.log(e.target);
   }
 
   deleteHero() {

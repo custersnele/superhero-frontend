@@ -1,3 +1,11 @@
 .hero-missions {
   padding-top: 15px;
 }
+
+.btn-primary {
+  margin: 5px;
+}
+
+.card-title {
+  font-size: larger;
+}

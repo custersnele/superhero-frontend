@@ -11,8 +11,8 @@ import { Mission } from '../mission.interface';
 })
 export class MissionsDetailComponent implements OnInit {
 
-  mission: Mission;
-  missionId: string;
+  mission?: Mission;
+  missionId?: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class MissionsDetailComponent implements OnInit {
     // Get response based on parameter in url
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.missionId = params.get('missionId');
+        this.missionId = parseInt(params.get('missionId') as string);
         return this.missionService.getMissionById(this.missionId);
       })
     ).subscribe(mission => {
@@ -32,13 +32,15 @@ export class MissionsDetailComponent implements OnInit {
       console.log(this.mission);
     });
   }
-  
+
   deleteMission() {
-    this.missionService.deleteMission(this.missionId).subscribe(() => {
-      this.router.navigateByUrl('/missions');
-    });
+    if (this.missionId) {
+      this.missionService.deleteMission(this.missionId).subscribe(() => {
+        this.router.navigateByUrl('/missions');
+      });
+    }
   }
-  
+
   editMission() {
     this.router.navigateByUrl('/missions/edit/'+this.missionId);
   }

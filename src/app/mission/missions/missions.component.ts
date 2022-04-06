@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class MissionsComponent implements OnInit {
 
-  missions: Mission[];
+  missions: Mission[] = [];
 
   constructor(
     private missionService: MissionService,

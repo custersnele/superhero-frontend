@@ -1,6 +1,9 @@
+import {Hero} from '../hero/hero.interface';
+
 export interface Mission {
+  id?: number;
   missionName: string;
-  id: number;
   completed: boolean;
   deleted: boolean;
+  superheroes?: Hero[];
 }

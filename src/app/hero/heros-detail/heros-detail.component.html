@@ -12,13 +12,13 @@
       <div [ngSwitch]="isMission">
         <a (click)="isMission = !isMission" class="btn btn-primary" *ngSwitchCase="false">+</a>
 
-        <form [formGroup]="myForm" *ngSwitchCase="true">
-          <input formControlName="mission"
-                  placeholder="Typeahead inside a form"
-                  class="form-control">
-
-          <button class="btn btn-primary" (click)="addMissionToHero()">Add Mission</button>
-        </form>
+       <div *ngSwitchCase="true">
+          <input type="text" list="missions" [(ngModel)]="selectedOption">
+          <datalist id="missions">
+            <option *ngFor="let m of missions">{{m.missionName}}</option>
+          </datalist>
+          <button id="add-mission-button" class="btn btn-primary" (click)="addMissionToHero()">Add Mission</button>
+      </div>
 
 
       <ul *ngFor="let mission of hero.missions">

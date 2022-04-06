@@ -12,9 +12,9 @@ import { Mission } from '../mission.interface';
 })
 export class EditMissionComponent implements OnInit {
 
-  mission: Mission;
-  missionId: string;
-  missionForm: FormGroup;
+  mission?: Mission;
+  missionId?: number;
+  missionForm!: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -23,39 +23,41 @@ export class EditMissionComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    
+
     // Get response based on parameter in url
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.missionId = params.get('missionId');
+        this.missionId = parseInt(params.get('missionId') as string);
         return this.missionService.getMissionById(this.missionId);
       })
     ).subscribe(mission => {
       this.mission = mission;
-      this.missionForm.setValue(mission);
+      this.missionForm.patchValue(mission);
       console.log(this.mission);
     });
   }
-  
+
   private createForm() {
     this.missionForm = new FormGroup({
-      missionName: new FormControl('', Validators.required),      
+      missionName: new FormControl('', Validators.required),
       completed: new FormControl('', Validators.required),
       deleted: new FormControl('', Validators.required),
       superheroes: new FormControl('')
     });
   }
-  
+
   updateMission() {
-    const newMission = {
-      missionName: this.missionForm.value.missionName,      
+    const newMission : Mission = {
+      missionName: this.missionForm.value.missionName,
       completed: this.missionForm.value.completed,
-      deleted: this.mission.deleted
+      deleted: this.mission? this.mission.deleted : false
     };
 
-    this.missionService.updateMission(this.missionId, newMission).subscribe(() => {
-      this.router.navigateByUrl('/missions/'+this.missionId);
-    });
+    if (this.missionId) {
+      this.missionService.updateMission(this.missionId, newMission).subscribe(() => {
+        this.router.navigateByUrl('/missions/' + this.missionId);
+      });
+    }
   }
 
 }
