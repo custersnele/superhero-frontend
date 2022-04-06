@@ -8,9 +8,9 @@ import { MissionService } from 'src/app/shared/services/mission.service';
 import { Mission } from 'src/app/mission/mission.interface';
 
 @Component({
-  selector: 'app-heros-detail',
-  templateUrl: './heros-detail.component.html',
-  styleUrls: ['./heros-detail.component.css']
+  selector: 'app-heroes-detail',
+  templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.css']
 })
 export class HerosDetailComponent implements OnInit {
   heroId?: number;
@@ -85,13 +85,13 @@ export class HerosDetailComponent implements OnInit {
   deleteHero() {
     if (this.heroId) {
       this.heroService.deleteHero(this.heroId).subscribe(() => {
-        this.router.navigateByUrl('/heros');
+        this.router.navigateByUrl('/heroes');
       });
     }
   }
 
   editHero() {
-    this.router.navigateByUrl('/heros/edit/'+this.heroId);
+    this.router.navigateByUrl('/heroes/edit/'+this.heroId);
   }
 
 }

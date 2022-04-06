@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-light" (click)="addHero()">Add Hero</button>
 </div>
 
-<div *ngFor="let hero of heros" class="card-list">
+<div *ngFor="let hero of heroes" class="card-list">
  <div class="card" [routerLink]="hero.id? hero.id.toString() : ''">
   <div class="card-body">
       <h5 class="card-title">{{ hero.superheroName }}</h5>

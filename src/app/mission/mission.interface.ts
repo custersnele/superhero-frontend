@@ -5,5 +5,4 @@ export interface Mission {
   missionName: string;
   completed: boolean;
   deleted: boolean;
-  superheroes?: Hero[];
 }

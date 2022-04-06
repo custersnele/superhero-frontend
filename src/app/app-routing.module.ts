@@ -7,12 +7,12 @@ const routes: Routes = [
     loadChildren: () => import('./mission/mission.module').then(m => m.MissionModule)
   },
   {
-    path: 'heros',
+    path: 'heroes',
     loadChildren: () => import('./hero/hero.module').then(m => m.HeroModule)
   },
   {
     path: '',
-    redirectTo: 'heros',
+    redirectTo: 'heroes',
     pathMatch: 'full'
   }
 ];

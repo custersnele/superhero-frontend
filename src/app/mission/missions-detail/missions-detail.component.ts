@@ -3,6 +3,7 @@ import { switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MissionService } from 'src/app/shared/services/mission.service';
 import { Mission } from '../mission.interface';
+import {MissionDetail} from '../mission-detail.interface';
 
 @Component({
   selector: 'app-missions-detail',
@@ -11,7 +12,7 @@ import { Mission } from '../mission.interface';
 })
 export class MissionsDetailComponent implements OnInit {
 
-  mission?: Mission;
+  mission?: MissionDetail;
   missionId?: number;
 
   constructor(

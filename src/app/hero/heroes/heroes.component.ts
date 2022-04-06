@@ -4,13 +4,13 @@ import { Hero } from '../hero.interface';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-heros',
-  templateUrl: './heros.component.html',
-  styleUrls: ['./heros.component.css']
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css']
 })
-export class HerosComponent implements OnInit {
+export class HeroesComponent implements OnInit {
 
-  heros: Hero[] = [];
+  heroes: Hero[] = [];
 
   constructor(
     private heroService: HeroService,
@@ -18,13 +18,13 @@ export class HerosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.heroService.getSuperHeroes().subscribe(heros => {
-      this.heros = heros;
+    this.heroService.getSuperHeroes().subscribe(heroes => {
+      this.heroes = heroes;
     });
   }
 
   addHero() {
-    this.router.navigateByUrl('/heros/add');
+    this.router.navigateByUrl('/heroes/add');
   }
 
 }

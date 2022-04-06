@@ -38,7 +38,7 @@ export class AddHeroComponent implements OnInit {
     };
 
     this.heroService.addHero(newHero).subscribe(() => {
-      this.router.navigateByUrl('/heros');
+      this.router.navigateByUrl('/heroes');
     });
   }
 
