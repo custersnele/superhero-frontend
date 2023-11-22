@@ -17,7 +17,7 @@ const secureHttpOptions = {headers: new HttpHeaders({Authorization: 'Basic ' + b
 })
 export class HeroService {
 
-  heroApiUrl = 'http://localhost:8080/api/superheroes';
+  heroApiUrl = 'http://localhost:8080/superheroes';
 
   constructor(private http: HttpClient) { }
 

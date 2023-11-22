@@ -16,7 +16,7 @@ const secureHttpOptions = {headers: new HttpHeaders({Authorization: 'Basic ' + b
 })
 export class MissionService {
 
-  missionApiUrl = 'http://localhost:8080/api/missions';
+  missionApiUrl = 'http://localhost:8080/missions';
 
   constructor(private http: HttpClient) { }
 
