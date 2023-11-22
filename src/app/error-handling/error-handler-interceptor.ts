@@ -31,7 +31,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         console.log("INTERCEPTOR ERROR");
         if(err instanceof HttpErrorResponse) {
           try {
-            this.toasterService.error(err.error.message, err.error.errors, { positionClass: 'toast-bottom-center' });
+            this.toasterService.error(err.message, err.error.errors, { positionClass: 'toast-bottom-center' });
           } catch(e) {
             this.toasterService.error('An error occurred', '', { positionClass: 'toast-bottom-center' });
           }

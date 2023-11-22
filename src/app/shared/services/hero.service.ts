@@ -45,4 +45,15 @@ export class HeroService {
     return this.http.delete(this.heroApiUrl+ '/' + heroId, secureHttpOptions);
   }
 
+  getIdCard(heroId: number) {
+    let headers= new HttpHeaders({
+      'Content-Type':  'application/pdf',
+      responseType : 'blob',
+      Accept : 'application/pdf',
+      observe : 'response'
+    })
+
+    return this.http.get(this.heroApiUrl + "/" + heroId + "/idcard", { headers, responseType: "blob" });
+  }
+
 }

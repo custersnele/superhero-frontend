@@ -94,4 +94,19 @@ export class HerosDetailComponent implements OnInit {
     this.router.navigateByUrl('/heroes/edit/'+this.heroId);
   }
 
+  downloadIdCard() {
+    if (this.heroId) {
+      this.heroService.getIdCard(this.heroId).subscribe((response: any) => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+
+        const fileURL = URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+        window.open(fileURL, '_blank');
+
+
+      });
+    }
+  }
+
 }
